@@ -1,0 +1,117 @@
+body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 712px;
+  margin: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("/img/background.png") ;
+  font-family: sans-serif;
+  font-weight: 900;
+}
+
+button {
+  outline: none;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-weight: 900;
+  color: white;
+}
+
+.game-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0px 240px;
+}
+
+.play-button {
+  padding: 13px 30px;
+  background-color: tomato;
+  font-weight: 900;
+  font-size: 2em;
+  color: white;
+}
+
+.play-button:hover {
+  transform: scale(1.05);
+  background-color: black;
+}
+
+.game-info__container {
+  display: flex;
+  font-size: 1.3em;
+}
+
+.game-info {
+  margin: 10px;
+}
+
+.play-ground {
+  display: flex;
+  height: 628px;
+  width: 100%;
+}
+
+.carrot {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background-image: url("/img/carrot.png");
+  background-size: cover;
+  cursor: pointer;
+}
+
+.carrot:hover {
+  width: 105px;
+  height: 105px;
+}
+
+.bug {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url("/img/bug.png");
+  background-size: cover;
+  cursor: pointer;
+}
+
+.result-window__container {
+  z-index: 99;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.result-comment,
+.replay-button {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 2.8em;
+  color: yellow;
+}
+
+.replay-button {
+  padding: 16px 50px;
+  background-color: black;
+  font-size: 2.5em;
+  color: white;
+}
+
+.replay-button:hover {
+  transform: scale(1.05);
+  background-color: tomato;
+}
+
+.display--none {
+  display: none;
+}

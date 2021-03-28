@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrot Game</title>
+  <link rel="stylesheet" href="styles.css" class="css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <header class="game-header">
+    <button class="play-button" type="button">PLAY</button>
+    <div class="game-info__container">
+      <div class="game-info carrot-info">
+        <span class="carrot-icon">🥕</span>
+        <span class="remaining-carrot">20</span>
+      </div>
+      <div class="game-info time-info">
+        <span class="time-icon">⏳</span>
+        <span class="remaining-time">10</span>
+      </div>
+    </div>
+  </header>
+  <section class="play-ground"></section>
+  <article class="result-window__container display--none">
+    <div class="result-window">
+      <span class="result-comment">COMMENT</span>
+      <button class="replay-button" type="button">REPLAY</button>
+    </div>
+  </article>
+  <figure>
+    <audio src="sound/alert.wav"></audio>
+    <audio src="sound/bg.mp3"></audio>
+    <audio src="sound/bug_pull.mp3"></audio>
+    <audio src="sound/carrot_pull.mp3"></audio>
+    <audio src="sound/game_win.mp3"></audio>
+  </figure>
+</body>
+</html>
