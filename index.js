@@ -17,7 +17,7 @@ const DISPLAY_NONE = 'display--none';
 const GAME_COMMENT = {
   CLICKED_ALL_CARROTS: 'SUCCESS! Carrots are Yours.',
   CLICKED_BUG: 'FAIL! Bugs will have all carrots.'
-}
+};
 
 function handleReplayBtnClick() {
   $resultWindow.classList.add(DISPLAY_NONE);
@@ -44,24 +44,24 @@ function showResultWindow(timerID) {
 }
 
 function handleCarrotClick(ev, timerID) {
-  $effectSounds[3].play();
   numbOfCarrots--;
   ev.target.remove();
+  $effectSounds[3].play();
   $remainingCarrots.textContent = numbOfCarrots;
+
   !numbOfCarrots && showResultWindow(timerID);
 }
 
 function arrangeBugs(timerID) {
   for (let i = 0; i < numOfBugs; i++) {
-    const bugImg = document.createElement('span');
-    const bugLocationX = makeRandomCoordinate().x;
-    const bugLocationY = makeRandomCoordinate().y;
+    const bug = document.createElement('span');
+    const location = makeRandomLocation(bug);
 
-    $playGround.append(bugImg);
-    bugImg.className = 'bug';
-    bugImg.style.transform = `translate(${bugLocationX}px, ${bugLocationY}px)`;
+    $playGround.append(bug);
+    bug.className = 'bug';
+    bug.style.transform = `translate(${location.x}px, ${location.y}px)`;
 
-    bugImg.addEventListener('click', () => {
+    bug.addEventListener('click', () => {
       $effectSounds[2].play();
       showResultWindow(timerID);
     });
@@ -70,33 +70,35 @@ function arrangeBugs(timerID) {
 
 function arrangeCarrots(timerID) {
   for (let i = 0; i < numbOfCarrots; i++) {
-    const carrotImg = document.createElement('span');
-    const carrotLocationX = makeRandomCoordinate().x;
-    const carrotLocationY = makeRandomCoordinate().y;
+    const carrot = document.createElement('span');
+    const randomLocation = makeRandomLocation(carrot);
 
-    $playGround.append(carrotImg);
-    carrotImg.className = 'carrot';
-    carrotImg.style.transform = `translate(${carrotLocationX}px, ${carrotLocationY}px)`;
-    $remainingCarrots.textContent = numbOfCarrots;
+    $playGround.append(carrot);
+    carrot.className = 'carrot';
+    carrot.style.transform = `translate(${randomLocation.x}px, ${randomLocation.y}px)`;
 
-    carrotImg.addEventListener('click', ev => {
+    carrot.addEventListener('click', ev => {
       handleCarrotClick(ev, timerID)
     });
   }
 }
 
-function makeRandomCoordinate() {
-  const body = document.querySelector('body');
-  const randomLocationX = Math.floor(Math.random() * body.clientWidth-50);
-  const randomLocationY = Math.floor(Math.random() * 270);
-  const randomLocation = { x: randomLocationX, y: randomLocationY };
+function makeRandomLocation(carrotOrBug) {
+  const $body = document.querySelector('body');
+  const randomNumberX = Math.floor(Math.random() * $body.clientWidth - 80);
+  const randomNumberY = Math.floor(Math.random() * 240);
 
+  const carrotOrBugX = Math.abs(randomNumberX - carrotOrBug.getBoundingClientRect().x);
+  const carrotOrBugY = Math.abs(randomNumberY - carrotOrBug.getBoundingClientRect().y);
+
+  const randomLocation = { x: carrotOrBugX, y: carrotOrBugY };
   return randomLocation;
 }
 
 function startTimeLimit() {
   let time = 10;
   $remainingSec.textContent = time;
+  $remainingCarrots.textContent = numbOfCarrots;
 
   timerID = setInterval(function () {
     time--;
@@ -112,9 +114,9 @@ function startTimeLimit() {
   arrangeBugs(timerID);
 }
 
-function handleStartGame() {
+function handlePlayGame() {
   $effectSounds[1].play();
-  $playButton.removeEventListener('click', handleStartGame);
+  $playButton.removeEventListener('click', handlePlayGame);
   $playButton.addEventListener('click', () => {
     $effectSounds[0].play();
   });
@@ -124,7 +126,7 @@ function handleStartGame() {
 
 function startIntro() {
   $remainingCarrots.textContent = startingNumOfCarrots;
-  $playButton.addEventListener('click', handleStartGame);
+  $playButton.addEventListener('click', handlePlayGame);
 }
 
 startIntro();
